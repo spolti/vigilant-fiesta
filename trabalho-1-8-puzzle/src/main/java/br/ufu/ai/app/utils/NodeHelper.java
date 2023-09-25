@@ -3,7 +3,6 @@ package br.ufu.ai.app.utils;
 import br.ufu.ai.app.Directions;
 import br.ufu.ai.app.Node;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +11,7 @@ public abstract class NodeHelper {
 
     /**
      * Create a new node based in the Manhattan Distance Heuristic
+     *
      * @param state
      * @param parent
      * @param g
@@ -25,6 +25,7 @@ public abstract class NodeHelper {
 
     /**
      * Create a new node based in the Pieces Not In Place Heuristic
+     *
      * @param state
      * @param parent
      * @param g
@@ -38,13 +39,14 @@ public abstract class NodeHelper {
 
     /**
      * Generate and return all the possible board states from the given {@link Node}
+     *
      * @param node
      * @return list of all possible states
      */
-    public static Set<int[]> successors (Node node) {
+    public static Set<int[]> successors(Node node) {
         // use HashSet to not add duplicates, it will save a few lines of code to check if the state already exists
-        // in the possible successors list
-        Set<int[]> possibleSuccessors = new HashSet<>();
+        // in the possible successors list, e.g. do not add the node itself.
+        Set<int[]> allSuccessors = new HashSet<>();
         // copy state to avoid changing the original by accident
         int[] copyOfState = new int[9];
         System.arraycopy(node.getState(), 0, copyOfState, 0, 9);
@@ -53,11 +55,11 @@ public abstract class NodeHelper {
         // the generated board is the same thus the state is ignored.
         for (Directions direction : Directions.values()) {
             int[] successor = BoardHelper.move(copyOfState, direction);
-            if (! Arrays.equals(copyOfState, successor)) {
-                possibleSuccessors.add(successor);
+            if (!Arrays.equals(copyOfState, successor)) {
+                allSuccessors.add(successor);
             }
         }
-        return possibleSuccessors;
+        return allSuccessors;
     }
 
 

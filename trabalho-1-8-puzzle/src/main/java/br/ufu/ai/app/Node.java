@@ -1,11 +1,13 @@
 package br.ufu.ai.app;
 
-import br.ufu.ai.app.utils.BoardHelper;
 import br.ufu.ai.app.utils.Helpers;
 
 import java.util.Arrays;
 
-public class Node implements Comparable<Node>{
+/**
+ * Implements the comparator to sort the nodes by the heuristic value
+ */
+public class Node implements Comparable<Node> {
 
     private int[] state;
     private Node parent;
