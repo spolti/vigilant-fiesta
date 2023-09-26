@@ -71,9 +71,9 @@ public abstract class Helpers {
     }
 
 
-
     /**
      * Plot the array in a 3x3 matrix
+     *
      * @param array
      * @param state
      */

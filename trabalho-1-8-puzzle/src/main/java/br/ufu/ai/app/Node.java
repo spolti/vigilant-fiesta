@@ -23,10 +23,6 @@ public class Node implements Comparable<Node> {
         this.g = g;
     }
 
-    public Node(int[] state) {
-        this.state = state;
-    }
-
     public int[] getState() {
         return state;
     }
@@ -50,7 +46,6 @@ public class Node implements Comparable<Node> {
 
         Node node = (Node) o;
 
-        //if (h != node.h) return false;
         return Arrays.equals(state, node.state);
     }
 
@@ -61,9 +56,6 @@ public class Node implements Comparable<Node> {
 
     @Override
     public int compareTo(Node o) {
-//        if (h == o.h) {
-//            return h;
-//        }
         return h - o.h;
     }
 

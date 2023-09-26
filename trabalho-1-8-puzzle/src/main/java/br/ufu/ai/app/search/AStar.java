@@ -72,17 +72,13 @@ public abstract class AStar {
                             goalState);
                 }
 
-                // add the successor in the already generated ones, to avoid
-                // looping
                 if (!visited.contains(newNode)) {
                     edge.add(newNode);
                 }
+                // add the successor in the already generated ones, to avoid
+                // looping
                 visited.add(node);
             }
-
-
-            // if it is not the goalState, expand the node
-            // edge.addAll(NodeHelper.expand(node, goalState, heuristic));
 
             // increment the iterations
             iterations++;

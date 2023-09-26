@@ -13,43 +13,44 @@ public abstract class BoardHelper {
 
     /**
      * Move the piece to the desired direction
+     *
      * @param state
      * @param direction
      * @return the new state after the movement.
      */
-    public static int[] move (int[] state, Directions direction) {
+    public static int[] move(int[] state, Directions direction) {
         // get the position of the blank space
         Map<String, Integer> position = positionOnMatrix(state, 0);
         int[][] board = getBoardAsMatrix(state);
         switch (direction) {
             case UP:
-                if(position.get(LINE_KEY) > 0) {
+                if (position.get(LINE_KEY) > 0) {
                     int tempPos = board[position.get(LINE_KEY) - 1][position.get(COLUMN_KEY)];
-                    board[position.get(LINE_KEY) - 1][position.get(COLUMN_KEY)] =  board[position.get(LINE_KEY)][position.get(COLUMN_KEY)];
+                    board[position.get(LINE_KEY) - 1][position.get(COLUMN_KEY)] = board[position.get(LINE_KEY)][position.get(COLUMN_KEY)];
                     board[position.get(LINE_KEY)][position.get(COLUMN_KEY)] = tempPos;
                 }
-                return  Arrays.stream(board).flatMapToInt(Arrays::stream).toArray();
+                return Arrays.stream(board).flatMapToInt(Arrays::stream).toArray();
 
             case DOWN:
-                if(position.get(LINE_KEY) < 2) {
+                if (position.get(LINE_KEY) < 2) {
                     int tempPos = board[position.get(LINE_KEY) + 1][position.get(COLUMN_KEY)];
-                    board[position.get(LINE_KEY) + 1][position.get(COLUMN_KEY)] =  board[position.get(LINE_KEY)][position.get(COLUMN_KEY)];
+                    board[position.get(LINE_KEY) + 1][position.get(COLUMN_KEY)] = board[position.get(LINE_KEY)][position.get(COLUMN_KEY)];
                     board[position.get(LINE_KEY)][position.get(COLUMN_KEY)] = tempPos;
                 }
-                return  Arrays.stream(board).flatMapToInt(Arrays::stream).toArray();
+                return Arrays.stream(board).flatMapToInt(Arrays::stream).toArray();
 
             case LEFT:
-                if(position.get(COLUMN_KEY) > 0) {
+                if (position.get(COLUMN_KEY) > 0) {
                     int tempPos = board[position.get(LINE_KEY)][position.get(COLUMN_KEY) - 1];
-                    board[position.get(LINE_KEY)][position.get(COLUMN_KEY) - 1] =  board[position.get(LINE_KEY)][position.get(COLUMN_KEY)];
+                    board[position.get(LINE_KEY)][position.get(COLUMN_KEY) - 1] = board[position.get(LINE_KEY)][position.get(COLUMN_KEY)];
                     board[position.get(LINE_KEY)][position.get(COLUMN_KEY)] = tempPos;
                 }
-                return  Arrays.stream(board).flatMapToInt(Arrays::stream).toArray();
+                return Arrays.stream(board).flatMapToInt(Arrays::stream).toArray();
 
             case RIGHT:
-                if(position.get(COLUMN_KEY) < 2) {
+                if (position.get(COLUMN_KEY) < 2) {
                     int tempPos = board[position.get(LINE_KEY)][position.get(COLUMN_KEY) + 1];
-                    board[position.get(LINE_KEY)][position.get(COLUMN_KEY) + 1] =  board[position.get(LINE_KEY)][position.get(COLUMN_KEY)];
+                    board[position.get(LINE_KEY)][position.get(COLUMN_KEY) + 1] = board[position.get(LINE_KEY)][position.get(COLUMN_KEY)];
                     board[position.get(LINE_KEY)][position.get(COLUMN_KEY)] = tempPos;
                 }
                 return Arrays.stream(board).flatMapToInt(Arrays::stream).toArray();
@@ -78,25 +79,30 @@ public abstract class BoardHelper {
             return true;
         } else if (initialStateInversions % 2 != 0 && goalStateInversions % 2 != 0) {
             System.out.println("Solvable, both have odd parity: " + initialStateInversions + " - " + goalStateInversions);
-            // System.exit(10);
             return true;
         } else {
             System.out.println("Not solvable, one has even parity and the other has odd parity: " + initialStateInversions + " - " + goalStateInversions);
-            // System.exit(10);
             return false;
         }
     }
 
     /**
      * Converts check if the
-     * @param  state, goalState
+     *
+     * @param state, goalState
      * @return true if the given state is the desired one
      */
-    public static boolean isTheSolution(int[] state, int[] goalState){
+    public static boolean isTheSolution(int[] state, int[] goalState) {
         return Arrays.equals(state, goalState);
     }
 
-    private static int parity (int[] array) {
+    /**
+     * Calculate the inversions of the board
+     *
+     * @param array
+     * @return the board parity.
+     */
+    private static int parity(int[] array) {
         int parity = 0;
         for (int i = 0; i < array.length; i++) {
             if (array[i] == 0) {
@@ -114,7 +120,6 @@ public abstract class BoardHelper {
         return parity;
     }
 
-
     /**
      * Locates the target element in the board and returns its position on the matrix
      * e.g. Target 6 is on line 2 and column 0
@@ -122,7 +127,7 @@ public abstract class BoardHelper {
      *
      * @param board
      * @param target
-     * @return
+     * @return a map with the position of the target element on the matrix
      */
     public static Map<String, Integer> positionOnMatrix(int[] board, int target) {
         Map<String, Integer> map = new HashMap<>();
@@ -135,7 +140,6 @@ public abstract class BoardHelper {
                 }
             }
         }
-        //System.out.println("Target " + target + " is on line " + map.get("line") + " and column " + map.get("column"));
         return map;
     }
 

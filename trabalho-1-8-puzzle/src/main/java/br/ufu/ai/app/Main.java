@@ -17,9 +17,7 @@ import java.util.concurrent.TimeUnit;
  * At the end of the execution, it will show the results comparing both.
  * <p>
  * TODOs:
- * - make the automatic generation of the goalState and initialState parameterizable
- * - plot a graph?????
- * - create the successors method
+ *   Migrate Main to quarkus app
  */
 public class Main {
 

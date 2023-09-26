@@ -10,6 +10,7 @@ public abstract class Heuristic {
     /**
      * First Heuristic
      * Calculate the quarter distance between the two nodes - Manhattan distance
+     *
      * @param currentState
      * @param goalState
      * @return the position of the target element in the matrix
@@ -19,7 +20,9 @@ public abstract class Heuristic {
         int[][] board1 = BoardHelper.getBoardAsMatrix(currentState);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (board1[i][j] == 0) {continue;}
+                if (board1[i][j] == 0) {
+                    continue;
+                }
                 Map<String, Integer> position = BoardHelper.positionOnMatrix(goalState, board1[i][j]);
                 if (position.get(LINE_KEY) != i || position.get(COLUMN_KEY) != j) {
                     out++;
@@ -33,6 +36,7 @@ public abstract class Heuristic {
     /**
      * Second Heuristic
      * Calculate the number of pieces not in place
+     *
      * @param currentState
      * @param goalState
      * @return the number of pieces not in place
@@ -42,7 +46,7 @@ public abstract class Heuristic {
         int[][] board1 = BoardHelper.getBoardAsMatrix(currentState);
         int[][] board2 = BoardHelper.getBoardAsMatrix(goalState);
         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3 ; j++) {
+            for (int j = 0; j < 3; j++) {
                 if (board1[i][j] != board2[i][j]) {
                     out++;
                 }
