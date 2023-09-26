@@ -87,6 +87,15 @@ public abstract class BoardHelper {
         }
     }
 
+    /**
+     * Converts check if the
+     * @param  state, goalState
+     * @return true if the given state is the desired one
+     */
+    public static boolean isTheSolution(int[] state, int[] goalState){
+        return Arrays.equals(state, goalState);
+    }
+
     private static int parity (int[] array) {
         int parity = 0;
         for (int i = 0; i < array.length; i++) {

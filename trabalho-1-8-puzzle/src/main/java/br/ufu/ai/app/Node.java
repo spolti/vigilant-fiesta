@@ -50,19 +50,20 @@ public class Node implements Comparable<Node> {
 
         Node node = (Node) o;
 
-        if (h != node.h) return false;
+        //if (h != node.h) return false;
         return Arrays.equals(state, node.state);
     }
 
     @Override
     public int hashCode() {
-        int result = Arrays.hashCode(state);
-        result = 31 * result + h;
-        return result;
+        return Arrays.hashCode(state);
     }
 
     @Override
     public int compareTo(Node o) {
+//        if (h == o.h) {
+//            return h;
+//        }
         return h - o.h;
     }
 

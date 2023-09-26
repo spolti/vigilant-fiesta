@@ -9,6 +9,7 @@ import br.ufu.ai.app.utils.NodeHelper;
 import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Main class
@@ -32,7 +33,6 @@ public class Main {
 
         System.out.println("\n########################################################################\n");
 
-        // TODO if is not solvable ask user if he wants to proceed anyways
         boolean solvable = BoardHelper.isSolvable(initialState, goalState);
         boolean proceed = false;
         if ( ! solvable) {
@@ -42,6 +42,9 @@ public class Main {
                 if (line.equals("y")) {
                     proceed = true;
                     break;
+                } else {
+                    System.out.println("Bye!");
+                    System.exit(0);
                 }
             }
         } else {
@@ -53,44 +56,19 @@ public class Main {
 
             System.out.println("Solving using Manhattan distance heuristic...");
             AStar.solve(initialState, goalState, AStar.MANHATTAN_DISTANCE_HEURISTIC);
-            System.out.println("Manhattan distance heuristic execution time: " + (System.currentTimeMillis() - start) + "ms\n");
+            long manh = System.currentTimeMillis() - start;
+            System.out.println("Manhattan distance heuristic execution time: " + (manh) + "ms\n");
 
             System.out.println("########################################################################");
 
             System.out.println("\nSolving using pieces not in place heuristic...");
             AStar.solve(initialState, goalState, AStar.NOT_IN_PLACE_HEURISTIC);
-            System.out.println("Pieces not in place heuristic execution time: " + (System.currentTimeMillis() - start) + "ms");
-
-//
-//        as.add(NodeHelper.createNodeManhattanDistanceHeuristic(initialState, null, 0, goalState));
-//        as.add(NodeHelper.createNodePiecesNotInPlaceHeuristic(initialState, null, 0, goalState));
-//        for(Node asd : as){
-//            System.out.println(asd.getH());
-//        }
-
-//        int[] currentState = BoardHelper.move(initialState, Directions.UP);
-//        Helpers.plot(currentState, "up");
-//
-//        currentState = BoardHelper.move(currentState, Directions.LEFT);
-//        Helpers.plot(currentState, "left");
-//
-//        currentState = BoardHelper.move(currentState, Directions.DOWN);
-//        Helpers.plot(currentState, "down");
-//
-//        currentState = BoardHelper.move(currentState, Directions.RIGHT);
-//        Helpers.plot(currentState, "right");
+            long pie = System.currentTimeMillis() - start;
+            System.out.println("Pieces not in place heuristic execution time: " + (pie) + "ms");
 
 
-            int[] array2 = new int[9];
-            System.arraycopy(initialState, 0, array2, 0, initialState.length);
-
-
-            Node test = new Node(initialState, null, 0, 0);
-
-            NodeHelper.successors(test).forEach(ints -> Helpers.plot(ints, "successor"));
-
-
-            System.out.println("Overall execution time: " + (System.currentTimeMillis() - start) + "ms");
+            System.out.println("########################################################################");
+            System.out.println("Overall execution time: " + TimeUnit.MILLISECONDS.toSeconds((manh + pie)) + "s");
             System.exit(0);
         } else {
             System.out.println("Bye!");
