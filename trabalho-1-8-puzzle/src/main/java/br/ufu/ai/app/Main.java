@@ -5,6 +5,8 @@ import br.ufu.ai.app.utils.BoardHelper;
 import br.ufu.ai.app.utils.Helpers;
 import br.ufu.ai.app.utils.Heuristic;
 import br.ufu.ai.app.utils.NodeHelper;
+import io.quarkus.runtime.QuarkusApplication;
+import io.quarkus.runtime.annotations.QuarkusMain;
 
 import java.io.IOException;
 import java.sql.SQLOutput;
@@ -19,9 +21,11 @@ import java.util.concurrent.TimeUnit;
  * TODOs:
  *   Migrate Main to quarkus app
  */
-public class Main {
+@QuarkusMain
+public class Main implements QuarkusApplication {
 
-    public static void main(String[] args) {
+    @Override
+    public int run(String... args) {
         Scanner scanner = new Scanner(System.in);
 
         int[] goalState = Helpers.generateState(9, true);
@@ -42,7 +46,7 @@ public class Main {
                     break;
                 } else {
                     System.out.println("Bye!");
-                    System.exit(0);
+                    return 0;
                 }
             }
         } else {
@@ -70,7 +74,9 @@ public class Main {
             System.exit(0);
         } else {
             System.out.println("Bye!");
-            System.exit(0);
+            return 0;
         }
+
+        return 0;
     }
 }
