@@ -3,8 +3,11 @@ package br.ufu.ai.app.utils;
 import br.ufu.ai.app.Directions;
 import br.ufu.ai.app.Node;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public abstract class NodeHelper {
@@ -62,5 +65,26 @@ public abstract class NodeHelper {
         return allSuccessors;
     }
 
+    /**
+     * Prints the path to solution backwards.
+     * @param node
+     */
+    public static void printPath(Node node) {
+        Set<int[]> path = new LinkedHashSet<>();
+        while (true) {
+            path.add(node.getState());
+            node = node.getParent();
 
+            if (node == null) {
+                break;
+            }
+        }
+
+        ArrayList<int[]> reversed = new ArrayList<>(path);
+        Collections.reverse(reversed);
+
+        for (int i = 0; i < reversed.size(); i++) {
+            Helpers.plot(reversed.get(i), "Step " + i);
+        }
+    }
 }

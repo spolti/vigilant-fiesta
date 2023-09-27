@@ -6,7 +6,10 @@ import br.ufu.ai.app.utils.Helpers;
 import br.ufu.ai.app.utils.NodeHelper;
 
 import javax.sound.midi.Soundbank;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -55,6 +58,10 @@ public abstract class AStar {
                 System.out.println("Final Cost: " + node.getG());
                 System.out.println("Iterations: " + iterations);
                 System.out.println("Generated States: " + visited.size());
+
+                // print the path
+                NodeHelper.printPath(node);
+
                 solutionFound = true;
                 break;
             }

@@ -61,21 +61,20 @@ public class Main implements QuarkusApplication {
             long manh = System.currentTimeMillis() - start;
             System.out.println("Manhattan distance heuristic execution time: " + (manh) + "ms\n");
 
-            System.out.println("########################################################################");
-
-            System.out.println("\nSolving using pieces not in place heuristic...");
-            AStar.solve(initialState, goalState, AStar.NOT_IN_PLACE_HEURISTIC);
-            long pie = System.currentTimeMillis() - start;
-            System.out.println("Pieces not in place heuristic execution time: " + (pie) + "ms");
-
-            System.out.println("########################################################################");
-            System.out.println("Overall execution time: " + TimeUnit.MILLISECONDS.toSeconds((manh + pie)) + "s");
-            System.exit(0);
+//            System.out.println("########################################################################");
+//
+//            System.out.println("\nSolving using pieces not in place heuristic...");
+//            AStar.solve(initialState, goalState, AStar.NOT_IN_PLACE_HEURISTIC);
+//            long pie = System.currentTimeMillis() - start;
+//            System.out.println("Pieces not in place heuristic execution time: " + (pie) + "ms");
+//
+//            System.out.println("########################################################################");
+//            System.out.println("Overall execution time: " + TimeUnit.MILLISECONDS.toSeconds((manh + pie)) + "s");
+//            System.exit(0);
         } else {
             System.out.println("Bye!");
             return 0;
         }
-
         return 0;
     }
 }
