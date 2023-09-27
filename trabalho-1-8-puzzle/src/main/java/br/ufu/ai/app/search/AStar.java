@@ -17,6 +17,12 @@ public abstract class AStar {
     // The heuristic is the priority order. The lower the value, the higher the priority
     private static final PriorityQueue<Node> edge = new PriorityQueue<>(100);
 
+    /**
+     * Solves the puzzle using the {@link br.ufu.ai.app.utils.Heuristic} methods
+     * @param initialState
+     * @param goalState
+     * @param heuristic
+     */
     public static void solve(int[] initialState, int[] goalState, String heuristic) {
         int iterations = 0;
         // add the initialState in the edge based in the heuristic
@@ -51,13 +57,11 @@ public abstract class AStar {
                 break;
             }
 
-            // if the solution is not found, continue the search by expanding the next possible
-            // successors
+            // if the solution is not found, continue the search by expanding
+            // the next possible  successors
             Set<int[]> successors = NodeHelper.successors(node);
             for (int[] suc : successors) {
-                // if the successor is not in the already generated nodes, add it
                 Node newNode = null;
-
                 if (heuristic.equals(MANHATTAN_DISTANCE_HEURISTIC)) {
                     newNode = NodeHelper.createNodeManhattanDistanceHeuristic(
                             suc,
@@ -71,7 +75,7 @@ public abstract class AStar {
                             node.getG() + 1,
                             goalState);
                 }
-
+                // add the new node in the edge if it was not visited yet
                 if (!visited.contains(newNode)) {
                     edge.add(newNode);
                 }
@@ -82,7 +86,6 @@ public abstract class AStar {
 
             // increment the iterations
             iterations++;
-
         }
 
         if (!solutionFound) {

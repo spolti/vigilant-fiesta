@@ -62,8 +62,8 @@ public abstract class BoardHelper {
 
 
     /**
-     * Checks the parity of the board, there are two worlds of 8-puzzle boards.
-     * If the initial board parity is even the board is solvable, otherwise it is not.
+     * Checks the board's parity, there are two worlds of 8-puzzle boards, even and odds.
+     * If the initial board and the goal state parity are both even or odd, then the board is solvable, otherwise it is not.
      * So, to check it initially we must check its parity first.
      *
      * @param initialState
@@ -87,7 +87,7 @@ public abstract class BoardHelper {
     }
 
     /**
-     * Converts check if the
+     * Check if the current state matches the desired state
      *
      * @param state, goalState
      * @return true if the given state is the desired one
@@ -97,7 +97,7 @@ public abstract class BoardHelper {
     }
 
     /**
-     * Calculate the inversions of the board
+     * Calculate the board's parity
      *
      * @param array
      * @return the board parity.
@@ -105,13 +105,9 @@ public abstract class BoardHelper {
     private static int parity(int[] array) {
         int parity = 0;
         for (int i = 0; i < array.length; i++) {
-            if (array[i] == 0) {
-                continue;
-            }
+            if (array[i] == 0) {continue;}
             for (int j = i + 1; j < array.length; j++) {
-                if (array[j] == 0) {
-                    continue;
-                }
+                if (array[j] == 0) {continue;}
                 if (array[i] > array[j]) {
                     parity++;
                 }
@@ -144,7 +140,7 @@ public abstract class BoardHelper {
     }
 
     /**
-     * receives a board array and transform return its corresponding matrix
+     * Receives the board in the array format and return its corresponding matrix
      *
      * @param array
      */

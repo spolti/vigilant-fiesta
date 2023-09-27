@@ -68,7 +68,6 @@ public class Main implements QuarkusApplication {
             long pie = System.currentTimeMillis() - start;
             System.out.println("Pieces not in place heuristic execution time: " + (pie) + "ms");
 
-
             System.out.println("########################################################################");
             System.out.println("Overall execution time: " + TimeUnit.MILLISECONDS.toSeconds((manh + pie)) + "s");
             System.exit(0);

@@ -16,7 +16,7 @@ public abstract class Heuristic {
      * @return the position of the target element in the matrix
      */
     public static int manhattanDistance(int[] currentState, int[] goalState) {
-        int out = 0, dist = 0;
+        int dist = 0;
         int[][] board1 = BoardHelper.getBoardAsMatrix(currentState);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -24,9 +24,6 @@ public abstract class Heuristic {
                     continue;
                 }
                 Map<String, Integer> position = BoardHelper.positionOnMatrix(goalState, board1[i][j]);
-                if (position.get(LINE_KEY) != i || position.get(COLUMN_KEY) != j) {
-                    out++;
-                }
                 dist += (Math.abs(position.get(LINE_KEY) - i) + Math.abs(position.get(COLUMN_KEY) - j));
             }
         }
@@ -54,5 +51,4 @@ public abstract class Heuristic {
         }
         return out;
     }
-
 }

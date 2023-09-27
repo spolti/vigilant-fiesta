@@ -7,6 +7,12 @@ import java.util.Set;
 
 public abstract class Helpers {
 
+    /**
+     * Helper method to help the initial and goal state generation.
+     * Check if the array has duplicate elements
+     * @param array
+     * @return
+     */
     public static boolean hasDuplicate(int[] array) {
         Set<Integer> seen = new HashSet<>();
         for (int num : array) {
