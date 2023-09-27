@@ -5,6 +5,7 @@ import br.ufu.ai.app.utils.BoardHelper;
 import br.ufu.ai.app.utils.Helpers;
 import br.ufu.ai.app.utils.NodeHelper;
 
+import javax.sound.midi.Soundbank;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
@@ -53,6 +54,7 @@ public abstract class AStar {
                 Helpers.plot(node.getState(), "Solution");
                 System.out.println("Final Cost: " + node.getG());
                 System.out.println("Iterations: " + iterations);
+                System.out.println("Generated States: " + visited.size());
                 solutionFound = true;
                 break;
             }
@@ -91,6 +93,7 @@ public abstract class AStar {
         if (!solutionFound) {
             System.out.println("The solution was not found....");
             System.out.println("Iterations: " + iterations);
+            System.out.println("Generated States: " + visited.size());
         }
     }
 }
