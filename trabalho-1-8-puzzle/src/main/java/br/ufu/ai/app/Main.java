@@ -28,9 +28,9 @@ public class Main implements QuarkusApplication {
     public int run(String... args) {
         Scanner scanner = new Scanner(System.in);
 
-        int[] goalState = Helpers.generateState(9, true);
+        int[] goalState = new int[] {1,2, 3, 4, 5, 6, 7, 8, 0};
         Helpers.plot(goalState, "Goal State");
-        int[] initialState = Helpers.generateState(9, true);
+        int[] initialState = new int[]{0,5,3,6,1,7,2,8,4};
         Helpers.plot(initialState, "Initial State");
 
         System.out.println("\n########################################################################\n");

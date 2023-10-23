@@ -5,11 +5,7 @@ import br.ufu.ai.app.utils.BoardHelper;
 import br.ufu.ai.app.utils.Helpers;
 import br.ufu.ai.app.utils.NodeHelper;
 
-import javax.sound.midi.Soundbank;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -23,6 +19,7 @@ public abstract class AStar {
 
     /**
      * Solves the puzzle using the {@link br.ufu.ai.app.utils.Heuristic} methods
+     *
      * @param initialState
      * @param goalState
      * @param heuristic
@@ -44,7 +41,8 @@ public abstract class AStar {
                     goalState));
         }
 
-        Set<Node> visited = new HashSet<>() {};
+        Set<Node> visited = new HashSet<>() {
+        };
         boolean solutionFound = false;
         // let's keep the loop while there are nodes to be expanded
         while (!edge.isEmpty()) {
@@ -89,7 +87,7 @@ public abstract class AStar {
                     edge.add(newNode);
                 }
                 // add the successor in the already generated ones, to avoid
-                // looping
+                // infinite loop
                 visited.add(node);
             }
 
