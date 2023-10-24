@@ -6,12 +6,12 @@ import br.ufu.ai.model.Player;
 public class Main {
     public static void main(String[] args) {
         // Max first
-        Player firstPlayer = new Player('X', "Max", true);
-        Player secondPlayer = new Player('O', "Min", false);
+//        Player firstPlayer = new Player('X', "Max", true);
+//        Player secondPlayer = new Player('O', "Min", true);
 
         // Mini first
-//        Player firstPlayer = new Player('O', "Min", true);
-//        Player secondPlayer = new Player('X', "Max", true);
+        Player firstPlayer = new Player('O', "Min", true);
+        Player secondPlayer = new Player('X', "Max", true);
 
         long start = System.currentTimeMillis();
         Game game = new Game(firstPlayer, secondPlayer, Game.MINIMAX);

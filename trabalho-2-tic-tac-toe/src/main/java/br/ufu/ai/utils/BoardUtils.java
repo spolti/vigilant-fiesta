@@ -113,4 +113,61 @@ public abstract class BoardUtils {
         }
         System.out.println(b);
     }
+
+    public static int evaluate(char board[][], char currentPlayer) {
+        int score = 0;
+
+        //lines
+        for (int i = 0; i < 3; i++) {
+            score += evaluateLine(board[i][0], board[i][1], board[i][2], currentPlayer);
+        }
+
+        // columns
+        for (int j = 0; j < 3; j++) {
+            score += evaluateLine(board[0][j], board[1][j], board[2][j], currentPlayer);
+        }
+
+        // diagonals
+        score += evaluateLine(board[0][0], board[1][1], board[2][2], currentPlayer);
+        score += evaluateLine(board[0][2], board[1][1], board[2][0], currentPlayer);
+
+        return score;
+    }
+
+
+    public static int evaluateLine(char cell1, char cell2, char cell3, char currentPlayer) {
+        int countPlayer = 0;
+        int countOpponent = 0;
+
+        if (cell1 == currentPlayer) {
+            countPlayer++;
+        } else if (cell1 != ' ') {
+            countOpponent++;
+        }
+
+        if (cell2 == currentPlayer) {
+            countPlayer++;
+        } else if (cell2 != ' ') {
+            countOpponent++;
+        }
+
+        if (cell3 == currentPlayer) {
+            countPlayer++;
+        } else if (cell3 != ' ') {
+            countOpponent++;
+        }
+
+        if (countPlayer == 3) {
+            return 100;
+        } else if (countOpponent == 3) {
+            return -100;
+        } else if (countPlayer == 2 && countOpponent == 0) {
+            return 10;
+        } else if (countPlayer == 1 && countOpponent == 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
 }

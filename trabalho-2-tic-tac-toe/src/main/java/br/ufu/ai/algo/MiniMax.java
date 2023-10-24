@@ -12,10 +12,12 @@ import java.util.Scanner;
 
 public class MiniMax {
 
-    private static int maxDepth = 0;
+    private static final int maxDepth = 9;
     private static int expandedNodes = 0;
     private static int expandedNodesTotal = 0;
-    private static Map<Character, Integer> scores = Map.of('X', 10, 'O', -10, 'P', 0);
+    private static int maxDepthCounter = 0;
+
+    private static Map<Character, Integer> scores = Map.of('X', 1000, 'O', -1000, 'P', 0);
 
     private static HashSet<char[][]> nodes = new HashSet<char[][]>();
 
@@ -32,25 +34,32 @@ public class MiniMax {
     public static int minimax(char board[][], boolean isMaximizing, int depth, char currentPlayer) {
         // keep track of the max depth
         // TODO add depth limit
-        maxDepth = depth;
+        maxDepthCounter = depth;
         // keep track of the expanded nodes
         expandedNodes++;
+
 
         char opponent = (currentPlayer == 'X') ? 'O' : 'X';
 
         // get available moves to expand everything
         char winner = BoardUtils.hasWon(board);
+
         // P == Tie
         if (winner != 'P') {
             return scores.get(winner);
-        }
+//            return BoardUtils.evaluate(board, opponent);
+       }
         if (BoardUtils.isDraw(board)) return 0;
+        // Se atingir a profundidade máxima, use a função de avaliação
+        if (depth >= maxDepth) {
+            return BoardUtils.evaluate(board, currentPlayer);
+        }
 
         List<int[]> moves = BoardUtils.getAvailableMoves(board);
 
         // MAX
         if (isMaximizing) {
-            int bestScore = Integer.MIN_VALUE;
+            int bestScore = BoardUtils.evaluate(board, currentPlayer);
             for (int i = 0; i < moves.size(); i++) {
                 char resultantMoveBoard[][] = BoardUtils.move(board, moves.get(i)[0], moves.get(i)[1], currentPlayer);
                 int score = minimax(resultantMoveBoard, false, depth + 1, opponent);
@@ -61,7 +70,7 @@ public class MiniMax {
             return bestScore;
 
         } else { // MIN
-            int bestScore = Integer.MAX_VALUE;
+            int bestScore = BoardUtils.evaluate(board, opponent);
             for (int i = 0; i < moves.size(); i++) {
                 char resultantMoveBoard[][] = BoardUtils.move(board, moves.get(i)[0], moves.get(i)[1], currentPlayer);
                 int score = minimax(resultantMoveBoard, true, depth + 1, opponent);
@@ -122,7 +131,7 @@ public class MiniMax {
             }
         }
         expandedNodesTotal = expandedNodesTotal + expandedNodes;
-        System.out.print("Move Took: (" + Arrays.toString(bestMove) + " -- Max Depth: " + maxDepth + " - " +
+        System.out.print("Move Took: (" + Arrays.toString(bestMove) + " -- Max Depth: " + maxDepthCounter + " - " +
                 " Expanded nodes (Total): " + expandedNodesTotal + " - " +
                 " Expanded nodes current move: " +expandedNodes + "): " +  (System.currentTimeMillis() - start + "ms\n"));
         expandedNodes = 0;

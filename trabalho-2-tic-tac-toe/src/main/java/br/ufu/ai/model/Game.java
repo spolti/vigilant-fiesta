@@ -18,14 +18,17 @@ public class Game {
             {' ', ' ', ' '}
     };
 
+//    private char board[][] = {
+//            {'X', 'X', 'O'},
+//            {'O', 'X', ' '},
+//            {'O', ' ', ' '}
+//    };
+
     public Game(Player firstPlayer, Player secondPlayer,  String algorithm) {
         System.out.println("Starting a new game ");
         this.currentPlayer = firstPlayer;
         this.nextPlayer = secondPlayer;
         this.algorithm = algorithm;
-//        if (board.length > 0) {
-//            board = ini
-//        }
     }
 
     public void start() {
